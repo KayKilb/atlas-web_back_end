@@ -2,7 +2,7 @@
 """The list of the delays should be in ascending order without using sort() because of concurrency"""
 from typing import List
 import asyncio
-wait_random = __impor('0-basic_async_syntax').wait_random
+wait_random = __import__('0-basic_async_syntax').wait_random
 
 async def wait_n(n: int, max_delay: int) -> List[float]:
     """Async routine to spawn wait_random n times with specified max_delay"""
