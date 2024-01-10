@@ -9,19 +9,17 @@ from base_caching import BaseCaching
 
 class LRUCache(BaseCaching):
     """Child-class implementing a pair of key/value algorithm (LRU)"""
-
     def __init__(self):
         """LRU Cache constructor"""
         super().__init__()
         self.keys_orders = []
 
-        def _add_element(self, key, value):
-            """adds an item to the cache while keeping track of its position in the cache order"""
-            if key in self.keys_orders:
-                self.keys_orders.remove(key)
-
-            self.keys_orders.append(key)
-            self.cache_data[key] = value
+    def _add_element(self, key, value):
+        """adds an item to the cache while keeping track of its position in the cache order"""
+        if key in self.keys_orders:
+            self.keys_orders.remove(key)
+        self.keys_orders.append(key)
+        self.cache_data[key] = value
 
     def put(self, key, value):
         """Inserting value into cache"""
@@ -54,7 +52,7 @@ class LRUCache(BaseCaching):
         if not key:
             return None
 
-        el = self.cache_data(key)
+        el = self.cache_data.get(key)
         if not el:
             return None
 
