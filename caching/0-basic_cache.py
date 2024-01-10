@@ -5,6 +5,7 @@ BaseCaching and is a caching system
 """
 from base_caching import BaseCaching
 
+
 class BasicCache(BaseCaching):
     """Child-class implementing key/value algorithm"""
 
@@ -12,7 +13,7 @@ class BasicCache(BaseCaching):
         """Inserting value into cache"""
         if key is None or value is None:
             return
-        
+
         self.cache_data[key] = value
 
     def get(self, key):
