@@ -35,8 +35,7 @@ class LRUCache(BaseCaching):
             """
             process that removes the least recently used (LRU)
             item from the cache when the number of items reaches
-            the maximum allowed. After removal, it adds a new
-            key-value pair to the cache using the LRU method
+            the maximum allowed
             """
             remove_key = self.keys_orders[0]
             self.keys_orders.pop(0)
