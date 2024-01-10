@@ -20,5 +20,5 @@ class BasicCache(BaseCaching):
         """Retrieves value from cache"""
         if not key:
             return None
-        
+
         return self.cache_data.get(key)
