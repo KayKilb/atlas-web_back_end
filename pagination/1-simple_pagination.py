@@ -49,4 +49,4 @@ class Server:
         start_index = page_size * (page - 1)
         end_index = page_size * page
 
-    return (start_index, end_index)
+        return (start_index, end_index)
