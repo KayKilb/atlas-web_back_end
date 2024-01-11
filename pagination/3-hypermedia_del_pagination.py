@@ -42,12 +42,11 @@ class Server:
     def get_hyper_index(self, index: int = None, page_size: int = 10) -> Dict:
         """Retrieve hypermedia index information."""
         assert (
-            index is None or 
+            index is None or
             (isinstance(index, int) and 0 <= index < len(self.__indexed_dataset))
         ), "Invalid index."
-        assert isinstance(page_size, int) and page_size > 0, "Page size must be a positive integer."
-
-
+        assert isinstance(page_size, int) and page_size > 0, 
+        "Page size must be a positive integer."
         if index is None:
             index = 0
         next_index = min(index + page_size, len(self.__indexed_dataset))
