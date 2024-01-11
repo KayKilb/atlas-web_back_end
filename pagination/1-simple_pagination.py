@@ -39,7 +39,7 @@ class Server:
 
         return dataset[start:end]
 
-    def index_range(page: int, page_size: int) -> Tuple[int, int]:
+    def index_range(self, page: int, page_size: int) -> Tuple[int, int]:
         """
         return a tuple of size two containing a
         start index and an end index corresponding
