@@ -48,7 +48,7 @@ class Server:
 
         return (start_index, end_index)
 
-    def get_hyper(self, page: int = 1, page_size: int = 10) -> Dict
+    def get_hyper(self, page: int = 1, page_size: int = 10) -> Dict:
         """get_hyper method that takes the same arguments (and defaults) as get_page and returns a dictionary containing the following key-value pairs
         """
         total pages = len(self.dataset()) // page_size
