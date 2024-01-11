@@ -1,5 +1,8 @@
 #!/usr/bin/env python3
-"""Server data handler"""
+"""
+a method named get_page that takes two integer arguments page with
+default value 1 and page_size with default value 10
+"""
 import csv
 import math
 from typing import List, Tuple
@@ -7,7 +10,7 @@ from typing import List, Tuple
 
 class Server:
     """
-    Server class to paginate a database of popular baby names.
+    Server class to paginate a database of popular baby names
     """
     DATA_FILE = "Popular_Baby_Names.csv"
 
@@ -27,7 +30,7 @@ class Server:
         return self.__dataset
 
     def get_page(self, page: int = 1, page_size: int = 10) -> List[List]:
-            """Return a poriton of the dataset given a page and page_size"""
+        """Retrieve a specific page from the dataset"""
             assert(type(page_size) == int and type(page) == int)
             assert(page > 0 and page_size > 0)
             start_index, end_index = self.index_range(page, page_size)
