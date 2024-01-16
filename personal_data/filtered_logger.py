@@ -44,6 +44,8 @@ class RedactingFormatter(logging.Formatter):
             message (str): a string representing the log line
             separator (str): a string representing by which character is
                             separating all fields in the log line (message)
+        Returns:
+            str: The obfuscated log message
         """
         for field in fields:
             message = re.sub(f"{field}=.*?{separator}",
