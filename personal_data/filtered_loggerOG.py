@@ -17,9 +17,11 @@ class RedactingFormatter(logging.Formatter):
     FORMAT = "[HOLBERTON] %(name)s %(levelname)s %(asctime)-15s: %(message)s"
     SEPARATOR = ";"
 
+
     def __init__(self, fields: List[str]):
         super(RedactingFormatter, self).__init__(self.FORMAT)
         self.fields = fields
+
 
     def format(self, record: logging.LogRecord) -> str:
         """Format method to class
@@ -32,9 +34,9 @@ class RedactingFormatter(logging.Formatter):
                             super().format(record), self.SEPARATOR)
         return msg
 
-    @staticmethod
+
     def filter_datum(fields: List[str], redaction: str,
-                     message: str, separator: str) -> str:
+                        message: str, separator: str) -> str:
         """function called filter_datum
         Args:
             fields (List): a list of strings representing all fields to obfuscate
@@ -51,11 +53,9 @@ class RedactingFormatter(logging.Formatter):
                                 message)
         return message
 
-    @staticmethod
+
     def get_logger() -> logging.Logger:
         """Creates and configures a logger with the custom formatter
-        Returns:
-            logging.Logger: Configured logger
         """
         logger = logging.getLogger("user_data")
         logger.setLevel(logging.INFO)
@@ -66,17 +66,15 @@ class RedactingFormatter(logging.Formatter):
         logger.addHandler(handler)
         return logger
 
-    @staticmethod
+
     def get_db() -> mysql.connector.connection.MySQLConnection:
-        """Connects to the MySQL database
-        Returns:
-            mysql.connector.connection.MySQLConnection: Database connection
-        """
+        """ Redacting Formatter class."""
         db = mysql.connector.connection.MySQLConnection(
             user=getenv('PERSONAL_DATA_DB_USERNAME', 'root'),
             password=getenv('PERSONAL_DATA_DB_PASSWORD', ''),
             host=getenv('PERSONAL_DATA_DB_HOST', 'localhost'),
             database=getenv('PERSONAL_DATA_DB_NAME'))
+
         return db
 
 def main():
