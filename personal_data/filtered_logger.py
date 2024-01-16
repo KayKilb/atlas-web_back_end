@@ -10,8 +10,8 @@ PII_FIELDS = ('name', 'email', 'phone', 'ssn', 'password')
 
 
 class RedactingFormatter(logging.Formatter):
-    """"Defines a custom log formatter that redacts PII fields from log messages
-    """
+    """ Redacting Formatter class
+        """
 
     REDACTION = "***"
     FORMAT = "[HOLBERTON] %(name)s %(levelname)s %(asctime)-15s: %(message)s"
@@ -29,55 +29,53 @@ class RedactingFormatter(logging.Formatter):
             str: [description]
         """
         msg = filter_datum(self.fields, self.REDACTION,
-                            super().format(record), self.SEPARATOR)
+                        super().format(record), self.SEPARATOR)
         return msg
 
-    @staticmethod
-    def filter_datum(fields: List[str], redaction: str,
-                     message: str, separator: str) -> str:
-        """function called filter_datum
-        Args:
-            fields (List): a list of strings representing all fields to obfuscate
-            redaction (str): a string representing by what the field will be obfuscated
-            message (str): a string representing the log line
-            separator (str): a string representing by which character is
-                            separating all fields in the log line (message)
-        Returns:
-            str: The obfuscated log message
-        """
-        for field in fields:
-            message = re.sub(f"{field}=.*?{separator}",
-                                f"{field}={redaction}{separator}",
-                                message)
-        return message
 
-    @staticmethod
-    def get_logger() -> logging.Logger:
-        """Creates and configures a logger with the custom formatter
-        Returns:
-            logging.Logger: Configured logger
-        """
-        logger = logging.getLogger("user_data")
-        logger.setLevel(logging.INFO)
-        logger.propagate = False
+def filter_datum(fields: List[str], redaction: str,
+                message: str, separator: str) -> str:
+    """function called filter_datum
+    Args:
+        fields (List): a list of strings representing all fields to obfuscate
+        redaction (str): a string representing by what
+                        the field will be obfuscated
+        message (str): a string representing the log line
+        separator (str): a string representing by which character is
+                        separating all fields in the log line (message)
+    """
+    for field in fields:
+        message = re.sub(f"{field}=.*?{separator}",
+                        f"{field}={redaction}{separator}",
+                        message)
+    return message
 
-        handler = logging.StreamHandler()
-        handler.setFormatter(RedactingFormatter(PII_FIELDS))
-        logger.addHandler(handler)
-        return logger
 
-    @staticmethod
-    def get_db() -> mysql.connector.connection.MySQLConnection:
-        """Connects to the MySQL database
-        Returns:
-            mysql.connector.connection.MySQLConnection: Database connection
-        """
-        db = mysql.connector.connection.MySQLConnection(
-            user=getenv('PERSONAL_DATA_DB_USERNAME', 'root'),
-            password=getenv('PERSONAL_DATA_DB_PASSWORD', ''),
-            host=getenv('PERSONAL_DATA_DB_HOST', 'localhost'),
-            database=getenv('PERSONAL_DATA_DB_NAME'))
-        return db
+def get_logger() -> logging.Logger:
+    """get_logger implementation
+    Returns:
+        logging.Logger:
+    """
+    logger = logging.getLogger("user_data")
+    logger.setLevel(logging.INFO)
+    logger.propagate = False
+
+    handler = logging.StreamHandler()
+    handler.setFormatter(RedactingFormatter(PII_FIELDS))
+    logger.addHandler(handler)
+    return logger
+
+
+def get_db() -> mysql.connector.connection.MySQLConnection:
+    """ Redacting Formatter class."""
+    db = mysql.connector.connection.MySQLConnection(
+        user=getenv('PERSONAL_DATA_DB_USERNAME', 'root'),
+        password=getenv('PERSONAL_DATA_DB_PASSWORD', ''),
+        host=getenv('PERSONAL_DATA_DB_HOST', 'localhost'),
+        database=getenv('PERSONAL_DATA_DB_NAME'))
+
+    return db
+
 
 def main():
     """ Redacting Formatter class."""
@@ -104,5 +102,5 @@ def main():
     db.close()
 
 
-    if __name__ == '__main__':
-        main()
+if __name__ == '__main__':
+    main()
