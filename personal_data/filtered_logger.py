@@ -29,12 +29,12 @@ class RedactingFormatter(logging.Formatter):
             str: [description]
         """
         msg = filter_datum(self.fields, self.REDACTION,
-                        super().format(record), self.SEPARATOR)
+                            super().format(record), self.SEPARATOR)
         return msg
 
 
 def filter_datum(fields: List[str], redaction: str,
-                message: str, separator: str) -> str:
+                    message: str, separator: str) -> str:
     """function called filter_datum
     Args:
         fields (List): a list of strings representing all fields to obfuscate
@@ -46,8 +46,8 @@ def filter_datum(fields: List[str], redaction: str,
     """
     for field in fields:
         message = re.sub(f"{field}=.*?{separator}",
-                        f"{field}={redaction}{separator}",
-                        message)
+                            f"{field}={redaction}{separator}",
+                            message)
     return message
 
 
@@ -95,7 +95,7 @@ def main():
                 f"user_agent={data[7]};"
         print(message)
         log_record = logging.LogRecord("my_logger", logging.INFO,
-                                        None, None, message, None, None)
+                                    None, None, message, None, None)
         formatter = RedactingFormatter(PII_FIELDS)
         formatter.format(log_record)
     cursor.close()
