@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-""" User Module
+""" User module
 """
 import hashlib
 from models.base import Base
@@ -20,7 +20,7 @@ class User(Base):
 
     @property
     def password(self) -> str:
-        """ Get password
+        """ Getter of the password
         """
         return self._password
 
