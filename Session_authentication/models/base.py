@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-""" Base Module
+""" Base module
 """
 from datetime import datetime
 from typing import TypeVar, List, Iterable
@@ -45,7 +45,7 @@ class Base():
         return (self.id == other.id)
 
     def to_json(self, for_serialization: bool = False) -> dict:
-        """ Convert the object to a JSON dictionary
+        """ Convert the object a JSON dictionary
         """
         result = {}
         for key, value in self.__dict__.items():
@@ -126,6 +126,7 @@ class Base():
         """ Search all objects with matching attributes
         """
         s_class = cls.__name__
+
         def _search(obj):
             if len(attributes) == 0:
                 return True
@@ -133,6 +134,6 @@ class Base():
                 if (getattr(obj, k) != v):
                     return False
             return True
-        
+
         return list(filter(_search, DATA[s_class].values()))
     
