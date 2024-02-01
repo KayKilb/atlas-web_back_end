@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-""" 1-app module """
+""" Basic Babel setup """
 from flask import Flask
 from flask_babel import Babel
 from routes.routes_1 import app_routes
